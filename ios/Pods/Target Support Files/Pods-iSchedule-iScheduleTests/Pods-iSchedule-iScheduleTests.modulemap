@@ -1,0 +1,6 @@
+module Pods_iSchedule_iScheduleTests {
+  umbrella header "Pods-iSchedule-iScheduleTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

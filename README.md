@@ -5,6 +5,8 @@
  
  Run instructions for iOS:
  
+    - • npm i
+    - • 'cd ios' and then 'pod install' 
     - • npx react-native run-ios
     - or -
     - • Open ISchedule/ios/ISchedule.xcworkspace in Xcode or run "xed -b ios"

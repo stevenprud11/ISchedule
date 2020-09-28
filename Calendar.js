@@ -15,61 +15,46 @@ import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import moment from 'moment';
 //Import moment.js to deal with time
 
-const EVENT_TITLE = 'Lunch';
-const TIME_NOW_IN_UTC = moment.utc();
+// const EVENT_TITLE = '';
+// const TIME_NOW_IN_UTC = '';
 
-const utcDateToString = (momentInUTC: moment): string => {
-  let s = moment.utc(momentInUTC).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-  return s;
-};
+// const utcDateToString = (momentInUTC: moment): string => {
+//   let s = moment.utc(momentInUTC).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
+//   return s;
+// };
 
-export default class App extends Component {
-  state = { text: '' };
+export default class Calendar extends Component {
+  state = { 
+    EVENT_TITLE: 'Event Title', //set default value to what is inputted
+    EVENT_TIME: '' //set default value to what is inputted
+  };
+
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
-          Example to Add Event in Google Calendar from React Native App
+          Event Info:
         </Text>
-        <Text style={styles.heading}>
-          Event title: {EVENT_TITLE}
-          {'\n'}
-          Event Date Time:{' '}
-          {moment
-            .utc(TIME_NOW_IN_UTC)
-            .local()
-            .format('lll')}
-        </Text>
+
+      <View style = {{ flex: 1, flexDirection:"row"}}>
+        <Text style = {styles.title} >Event Title: </Text>
+        <TextInput style = {styles.input}
+          value={this.state.EVENT_TITLE}
+          placeholder = {this.state.EVENT_TITLE} 
+          onChangeText={(EVENT_TITLE) => this.setState({EVENT_TITLE})}
+        />
+          
+      </View>
+
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            App.addToCalendar(EVENT_TITLE, TIME_NOW_IN_UTC);
+            Calendar.addToCalendar(this.state.EVENT_TITLE, this.state.EVENT_TIME);
           }}>
           <Text>Add Event to Calendar</Text>
         </TouchableOpacity>
-        <TextInput
-          style={styles.input}
-          placeholder="enter event id"
-          onChangeText={text => this.setState({ text })}
-          value={this.state.text}
-        />
-        <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
-            style={styles.buttonHalf}
-            onPress={() => {
-              App.editCalendarEventWithId(this.state.text);
-            }}>
-            <Text style={{ textAlign: 'center' }}>Edit Event</Text>
-          </TouchableOpacity>
-          <View style={{ margin: 5 }} />
-          <TouchableOpacity
-            style={styles.buttonHalf}
-            onPress={() => {
-              App.showCalendarEventWithId(this.state.text);
-            }}>
-            <Text style={{ textAlign: 'center' }}>View Event</Text>
-          </TouchableOpacity>
-        </View>
+
       </View>
     );
   }
@@ -80,6 +65,33 @@ export default class App extends Component {
       title,
       startDate: utcDateToString(startDateUTC),
       endDate: utcDateToString(moment.utc(startDateUTC).add(1, 'hours')),
+      notes: 'tasty!',
+      navigationBarIOS: {
+        tintColor: 'orange',
+        backgroundColor: 'green',
+        titleColor: 'blue',
+      },
+    };
+
+    AddCalendarEvent.presentEventCreatingDialog(eventConfig)
+      .then(
+        (eventInfo: {
+          calendarItemIdentifier: string,
+          eventIdentifier: string,
+        }) => {
+          alert('eventInfo -> ' + JSON.stringify(eventInfo));
+        }
+      )
+      .catch((error: string) => {
+        // handle error such as when user rejected permissions
+        alert('Error -> ' + error);
+      });
+  };
+
+  static addToCalendar = (title: strin) => {
+
+    const eventConfig = {
+      title,
       notes: 'tasty!',
       navigationBarIOS: {
         tintColor: 'orange',
@@ -138,6 +150,7 @@ export default class App extends Component {
   };
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -163,11 +176,15 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
   },
+  title: {
+    flexDirection: "row",
+    alignItems: 'center',
+    marginTop: 10,
+  },
   input: {
-    height: 40,
-    width: '100%',
-    marginBottom: 10,
-    marginTop: 30,
+    flexDirection: "row",
+    alignItems: 'center',
+    width: '80%',
     padding: 10,
     backgroundColor: '#ffe6e6',
   }

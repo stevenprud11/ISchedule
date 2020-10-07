@@ -5,8 +5,9 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 const DateTime = () => {
   const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(new Date(date.getFullYear(), date.getMonth(), date.getDate(), '12', '00', '00', '00'));
   const [mode, setMode] = useState('date');
+  const [value, setValue] = useState(date);
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedValue) => {
@@ -14,20 +15,22 @@ const DateTime = () => {
     if (mode == 'date') {
       const currentDate = selectedValue || new Date();
       setDate(currentDate);
-      setMode('time');
+      setValue(date)
+      setMode('date');
       setShow(Platform.OS !== 'ios'); // to show the picker again in time mode
     } else {
       const selectedTime = selectedValue || new Date();
       setTime(selectedTime);
+      setValue(time)
       setShow(Platform.OS === 'ios');
-      setMode('date');
+      setMode('time');
     }
   };
 
   const showMode = currentMode => {
     setShow(true);
     setMode(currentMode);
-  };
+   };
 
   const showDatepicker = () => {
     showMode('date');
@@ -42,9 +45,30 @@ const DateTime = () => {
       1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
 
-  
+  function addZero(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+
+  const formatTime = (time) => {
+      var h = addZero(time.getUTCHours() - Math.ceil(time.getTimezoneOffset()/60));
+      var m = addZero(time.getMinutes());
+      var t = 'AM'
+      if (h > 12)
+        t = 'PM'
+        if(h!=12 && h!=24)
+            return `${h%12}:${m} ${t}`;
+        return `${h%13}:${m} ${t}`;
+  }
   return (
     <View>
+        <Text>Current date: {new Date().toString()}</Text>
+        <Text>Date date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()}</Text>
+        <Text>Date time: {formatTime(date)}</Text>
+        <Text>Time date: {time.getMonth()+1}/{time.getDate()}/{time.getFullYear()}</Text>
+        <Text>Time time: {formatTime(time)}</Text>
       <View>
         <TouchableOpacity title="Show date picker" onPress={showDatepicker}>
           <Text>{date.getDate}</Text>
@@ -59,13 +83,12 @@ const DateTime = () => {
       <View>
         <Button onPress={showTimepicker} title="Show time picker!" />
       </View>
+      
       {show && (
         <DateTimePicker
-          testID="dateTimePicker"
-          timeZoneOffsetInMinutes={0}
-          value={date}
+          testID="dateTimePicker"r
+          value={date} // figure out how to show date vs time variable dependent on mode
           mode={mode}
-          is24Hour={true}
           display="default"
           onChange={onChange}
         />

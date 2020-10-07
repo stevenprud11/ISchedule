@@ -8,6 +8,7 @@
 
 import React from 'react';
 import Calendar from './Calendar.js'
+import DateTime from './DateTime.js'
 import {
   SafeAreaView,
   StyleSheet,
@@ -35,6 +36,7 @@ const App: () => React$Node = () => {
           style={styles.scrollView}>
           <Header />
           <Calendar></Calendar>
+          {/* <DateTime></DateTime> */}
         </ScrollView>
       </SafeAreaView>
     </>

@@ -12,7 +12,7 @@ import {
 //Import basic react native components
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import DatePicker from 'react-native-date-picker'
-//import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 //Import library for AddCalendarEvent
 import moment from 'moment';
@@ -26,32 +26,30 @@ import moment from 'moment';
 //   return s;
 // };
 
+//https://github.com/react-native-datetimepicker/datetimepicker/issues/94
+
 export default class Calendar extends Component {
   state = { 
     EVENT_TITLE: 'Event Title', //set default value to what is inputted
     EVENT_TIME: '', //set default value to what is inputted
     showDatePicker: false,
-    date: new Date()
+    date: new Date(),
+    time: new Date(),
+    //endtime: new Date().getTime
   };
 
-  showDateTimePicker = () =>{
-    if(this.state.showDatePicker)
-      return ( 
-        <DatePicker   
-          date={this.state.date}
-          onDateChange={(date) => this.setState({date})}
-        />
-      );
-    return null;
+  formatDate = (date, time) => {
+    return `${date.getMonth()}/${date.getDay() +
+      1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
+  };
+
+  setDate = (event, date) =>{
+
   }
 
   render() {
-    //this.setState({showDatePicker: false});
-    //let showDate;
-    // if(this.state.showDatePicker)
-    //   showDate = <DatePicker date={this.state.date} onDateChange={(date) => this.setState({date})} />;
-    // else
-    //   showDate = <Text></Text>
+    const {date} = this.state;
+    const {time} = this.state;
 
     return (
       <View style={styles.container}>
@@ -69,20 +67,34 @@ export default class Calendar extends Component {
         />
           
       </View>
-      
-      <View>
-        <TextInput value={this.state.date} />
-        
-        <Button 
-          title="Edit Date"
-          onPress={(showDatePicker) => this.setState(prevState => ({
-            showDatePicker: !prevState.showDatePicker
-          }))}
-        />
 
-        {this.showDateTimePicker()}
-            
+      {/* <View style = {{ flex: 1, flexDirection:"row"}}>
+        <Text style = {styles.title}>Event Date: </Text>
+
+        <DateTimePicker style = {styles.date}
+          value={date}
+          mode="date"
+          display="default"
+          onChange={this.setDate)}
+        />
+      </View> */}
+
+      {/* <View style = {{ flex: 1, flexDirection:"row"}}>
+        <Text style = {styles.title}>Event Time: </Text>
+
+        
+
+        <DateTimePicker style = {styles.date}
+          value={time.getTime}
+          is24Hour={true}
+          mode="time"
+          display="default"
+          onChange={(time) => this.setState({time})}
+        />
+      
       </View>
+
+      <TextInput value={this.state.date}/> */}
 
         <TouchableOpacity
           style={styles.button}
@@ -225,5 +237,11 @@ const styles = StyleSheet.create({
     width: '80%',
     padding: 10,
     backgroundColor: '#ffe6e6',
+  },
+  date: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '80%',
+    padding: 10,
   }
 });

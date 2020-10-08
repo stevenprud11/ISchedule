@@ -36,7 +36,7 @@ const App: () => React$Node = () => {
           style={styles.scrollView}>
           <Header />
           <Calendar></Calendar>
-          {/* <DateTime></DateTime> */}
+          <DateTime></DateTime>
         </ScrollView>
       </SafeAreaView>
     </>

@@ -22,6 +22,7 @@ const DateTime = () => {
       const selectedTime = selectedValue || new Date();
       setTime(selectedTime);
       setValue(time)
+      setDateTime(time);
       setShow(Platform.OS === 'ios');
       setMode('time');
     }
@@ -45,30 +46,20 @@ const DateTime = () => {
       1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
   };
 
-  function addZero(i) {
-    if (i < 10) {
-      i = "0" + i;
-    }
-    return i;
+  setDateTime = (time) => {
+    date.setHours(time.getHours(), time.getMinutes())
   }
 
-  const formatTime = (time) => {
-      var h = addZero(time.getUTCHours() - Math.ceil(time.getTimezoneOffset()/60));
-      var m = addZero(time.getMinutes());
-      var t = 'AM'
-      if (h > 12)
-        t = 'PM'
-        if(h!=12 && h!=24)
-            return `${h%12}:${m} ${t}`;
-        return `${h%13}:${m} ${t}`;
-  }
   return (
     <View>
         <Text>Current date: {new Date().toString()}</Text>
         <Text>Date date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()}</Text>
-        <Text>Date time: {formatTime(date)}</Text>
+        <Text>Date time: {date.toLocaleTimeString()}</Text>
         <Text>Time date: {time.getMonth()+1}/{time.getDate()}/{time.getFullYear()}</Text>
-        <Text>Time time: {formatTime(time)}</Text>
+        <Text>Time time: {time.toLocaleTimeString()}</Text>
+
+        <Text>Event Date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()} :: {date.toLocaleTimeString()}</Text>
+
       <View>
         <TouchableOpacity title="Show date picker" onPress={showDatepicker}>
           <Text>{date.getDate}</Text>

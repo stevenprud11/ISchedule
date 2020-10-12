@@ -8,9 +8,9 @@ import {
     TouchableOpacity,
   } from 'react-native';
 
-export default class Description extends Component {
+export default class Title extends Component {
     state ={
-        description: "Event Description"
+        title: "Event Title"
     }
 
     render(){
@@ -20,9 +20,9 @@ export default class Description extends Component {
             <View style = {{ flex: 1, flexDirection:"row"}}>
             <Text style = {styles.title} >Description: </Text>
             <TextInput style = {styles.input}
-              value={this.state.description}
-              placeholder = {this.state.description} 
-              onChangeText={(description) => this.setState({description})}
+              value={this.state.title}
+              placeholder = {this.state.title} 
+              onChangeText={(title) => this.setState({title})}
             />
               
           </View>

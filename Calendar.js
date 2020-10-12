@@ -13,6 +13,7 @@ import {
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
 import Description from './Description.js'
 import DateTime from './DateTime.js'
+import Title from './Title.js'
 
 //Import library for AddCalendarEvent
 import moment from 'moment';
@@ -30,9 +31,10 @@ import moment from 'moment';
 
 export default class Calendar extends Component {
   state = { 
-    EVENT_TITLE: 'Event Title', //set default value to what is inputted
-    EVENT_TIME: '', //set default value to what is inputted
-    showDatePicker: false,
+    title: String, //set default value to what is inputted
+    description: String,//set default value to what is inputted
+    date: new Date(),
+    time: new Date()
   };
 
   formatDate = (date, time) => {
@@ -53,19 +55,9 @@ export default class Calendar extends Component {
         <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
           Event Info:
         </Text>
-        
-        
-      <View style = {{ flex: 1, flexDirection:"row"}}>
-        <Text style = {styles.title} >Event Title: </Text>
-        <TextInput style = {styles.input}
-          value={this.state.EVENT_TITLE}
-          placeholder = {this.state.EVENT_TITLE} 
-          onChangeText={(EVENT_TITLE) => this.setState({EVENT_TITLE})}
-        />
-          
-      </View>
-      <View style={{ justifyContent: 'space-around'}}>
-        
+
+      <View style={{ flexDirection: 'column',justifyContent: 'space-around'}}>
+          <Title></Title>
 
           <Description></Description>
 

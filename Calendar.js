@@ -11,8 +11,8 @@ import {
 } from 'react-native';
 //Import basic react native components
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
-import DatePicker from 'react-native-date-picker'
-import DateTimePicker from '@react-native-community/datetimepicker';
+import Description from './Description.js'
+import DateTime from './DateTime.js'
 
 //Import library for AddCalendarEvent
 import moment from 'moment';
@@ -33,9 +33,6 @@ export default class Calendar extends Component {
     EVENT_TITLE: 'Event Title', //set default value to what is inputted
     EVENT_TIME: '', //set default value to what is inputted
     showDatePicker: false,
-    date: new Date(),
-    time: new Date(),
-    //endtime: new Date().getTime
   };
 
   formatDate = (date, time) => {
@@ -67,34 +64,16 @@ export default class Calendar extends Component {
         />
           
       </View>
-
-      {/* <View style = {{ flex: 1, flexDirection:"row"}}>
-        <Text style = {styles.title}>Event Date: </Text>
-
-        <DateTimePicker style = {styles.date}
-          value={date}
-          mode="date"
-          display="default"
-          onChange={this.setDate)}
-        />
-      </View> */}
-
-      {/* <View style = {{ flex: 1, flexDirection:"row"}}>
-        <Text style = {styles.title}>Event Time: </Text>
-
+      <View style={{ justifyContent: 'space-around'}}>
         
 
-        <DateTimePicker style = {styles.date}
-          value={time.getTime}
-          is24Hour={true}
-          mode="time"
-          display="default"
-          onChange={(time) => this.setState({time})}
-        />
-      
-      </View>
+          <Description></Description>
 
-      <TextInput value={this.state.date}/> */}
+          <DateTime></DateTime>
+
+      </View>
+      
+
 
         <TouchableOpacity
           style={styles.button}

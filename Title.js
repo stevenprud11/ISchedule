@@ -9,20 +9,19 @@ import {
   } from 'react-native';
 
 export default class Title extends Component {
-    state ={
-        title: "Event Title"
+    state = {
     }
+//need to pass prop to edit title from app bc props are not changable
 
     render(){
-
-
+        var setTitle = this.props.setTitle;
         return(
             <View style = {{ flex: 1, flexDirection:"row"}}>
-            <Text style = {styles.title} >Description: </Text>
+            <Text style = {styles.title} >Title: </Text>
             <TextInput style = {styles.input}
-              value={this.state.title}
-              placeholder = {this.state.title} 
-              onChangeText={(title) => this.setState({title})}
+              value={this.props.title}
+              placeholder = {this.props.title} 
+              onChangeText={(text) => this.props.setTitle(text)}
             />
               
           </View>

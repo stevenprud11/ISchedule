@@ -30,38 +30,43 @@ import moment from 'moment';
 //https://github.com/react-native-datetimepicker/datetimepicker/issues/94
 
 export default class Calendar extends Component {
-  state = { 
-    title: String, //set default value to what is inputted
-    description: String,//set default value to what is inputted
-    date: new Date(),
-    time: new Date()
-  };
+  constructor(props) {
+    super(props);
+    state = { 
 
-  formatDate = (date, time) => {
-    return `${date.getMonth()}/${date.getDay() +
-      1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
-  };
-
-  setDate = (event, date) =>{
-
+    };
   }
 
-  render() {
-    const {date} = this.state;
-    const {time} = this.state;
 
+
+  render() {
+    const {title, description, date, time} = this.props;
+    //console.log(this.props);
+    //console.log(title);
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
           Event Info:
         </Text>
 
+
       <View style={{ flexDirection: 'column',justifyContent: 'space-around'}}>
-          <Title></Title>
+          <Title 
+            title={title} 
+            setTitle={this.props.setTitle} 
+            />
 
-          <Description></Description>
+          <Description 
+            description={description}
+            setDescription={this.props.setDescription}
+          />
 
-          <DateTime></DateTime>
+          <DateTime 
+            date={date} 
+            setDate={this.props.setDate}  
+            time={time}
+            setTime={this.props.setTime}
+          />
 
       </View>
       

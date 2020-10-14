@@ -11,21 +11,16 @@ const DateTime = () => {
 
 
   const onDateChange = (event, selectedValue) =>{
-    //setShow(Platform.OS === 'ios');
     const currentDate = selectedValue || new Date();
     setDate(currentDate);
     setTime(currentDate);
-    //setValue(date)
-    //setShow(Platform.OS !== 'ios'); // to show the picker again in time mode
   }
 
   const onTimeChange = (event, selectedValue) => {
       const selectedTime = selectedValue || new Date();
       setTime(selectedTime);
       setDate(selectedTime);
-      //setValue(time)
       setDateTime(time);
-      //setShow(Platform.OS === 'ios');
   }
 
   const showDateBool = currentShow => {
@@ -47,23 +42,10 @@ const DateTime = () => {
   }
 
   return (
-    <View>
-        {/* <Text>Current date: {new Date().toString()}</Text>
-        <Text>Date date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()}</Text>
-        <Text>Date time: {date.toLocaleTimeString()}</Text>
-        <Text>Time date: {time.getMonth()+1}/{time.getDate()}/{time.getFullYear()}</Text>
-        <Text>Time time: {time.toLocaleTimeString()}</Text> */}
-
-        <Text>Event Date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()} :: {date.toLocaleTimeString()}</Text>
+    <View sytles={{flexDirection: 'column', justifyContent: 'center'}}>
+        <Text styles={{textAlign: 'center'}}>Event Date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()} {date.toLocaleTimeString()}</Text>
         <Text>Event Date: {date.toString()}</Text>
-      {/* <View>
-        <TouchableOpacity title="Show date picker" onPress={showDateBool}>
-          <Text>{date.getDate}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity title="Show time picker" onPress={showTimeBool}>
-          <Text>{time.getTime}</Text>
-        </TouchableOpacity>
-      </View> */}
+
 
       <View>
           <Button onPress={showDateBool} title="Show date picker!" />
@@ -89,16 +71,6 @@ const DateTime = () => {
           display="default"
           onChange={onTimeChange}
       />)}
-
-      {/* {show && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date} // figure out how to show date vs time variable dependent on mode
-          mode={mode}
-          display="default"
-          onChange={onChange}
-        />
-      )} */}
     </View>
   );
 };

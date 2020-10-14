@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import Home from './Home.js'
 import Calendar from './Calendar.js'
 import DateTime from './DateTime.js'
 import {
@@ -34,7 +35,7 @@ const App: () => React$Node = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <Header />
-          <Calendar></Calendar>
+          <Home/>
         </ScrollView>
     </>
   );

@@ -19,7 +19,8 @@ export default class Home extends Component {
       this.state = { 
         title: "Event Title",
         description: "Event Description",
-        date: new Date()
+        date: new Date(),
+        endDate: new Date()
       };
     }
 
@@ -33,6 +34,10 @@ export default class Home extends Component {
 
     setDate = (newDate) => {
         this.setState({date: newDate}, () => {console.log("new home date: " + this.state.date)})
+    }
+
+    setEndDate = (newEndDate) => {
+        this.setState({endDate: newEndDate}, () => {console.log("new home end date: " + this.state.endDate)})
     }
 
     getTitle = () =>{
@@ -52,11 +57,16 @@ export default class Home extends Component {
             <Calendar //need to pass in setters to set parent prop state
                 title={this.state.title} 
                 setTitle={this.setTitle}
+
                 description={this.state.description} 
                 setDescription={this.setDescription}
+
                 date={this.state.date} 
                 setDate={this.setDate}
                 time={this.state.time}
+
+                endDate={this.state.endDate}
+                setEndDate={this.setEndDate}
 
                 getTitle={this.getTitle}
                 getDescription={this.getDescription}

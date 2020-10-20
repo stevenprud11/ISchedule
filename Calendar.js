@@ -15,19 +15,8 @@ import Description from './Description.js'
 import DateTime from './DateTime.js'
 import Title from './Title.js'
 
-//Import library for AddCalendarEvent
+
 import moment from 'moment';
-//Import moment.js to deal with time
-
-// const EVENT_TITLE = '';
-// const TIME_NOW_IN_UTC = '';
-
-// const utcDateToString = (momentInUTC: moment): string => {
-//   let s = moment.utc(momentInUTC).format('YYYY-MM-DDTHH:mm:ss.SSS[Z]');
-//   return s;
-// };
-
-//https://github.com/react-native-datetimepicker/datetimepicker/issues/94
 
 export default class Calendar extends Component {
   constructor(props) {
@@ -35,32 +24,15 @@ export default class Calendar extends Component {
     state = { 
       title: props.title,
       description: props.description,
-      date: props.date
+      date: props.date,
+      endDate: props.endDate
      };
-    // console.log(state.title)
-    // console.log(state.description)
-    // console.log(state.date)
   }
-  
-  // componentDidMount = (props) =>{
-  //   this.setState({title: this.props.title, date: this.props.date, description: this.props.description})
-  //   console.log(this.props.title)
-  //   console.log(this.props.description)
-  //   console.log(this.props.date)
 
-  //   console.log(this.state.title)
-  //   console.log(this.state.description)
-  //   console.log(this.state.date)
-  // }
-
-  // getEndTime = (date: Date, h: Number) => {
-  //   return (date.getTime() + (h*60*60*1000))
-  //   // return new Date(date).addHours(1);
-  // }
 
 
   render() {
-    const {title, description, date, time} = this.props;
+    const {title, description, date, time, endDate} = this.props;
     //console.log(this.props);
     //console.log(title);
     return (
@@ -82,9 +54,17 @@ export default class Calendar extends Component {
           />
 
           <DateTime 
+            str={"Event Start Date and Time"}
             date={this.props.date} 
             setDate={this.props.setDate}
-            time={this.props.time}
+            //time={this.props.time}
+          />
+
+          <DateTime 
+            str={"Event End Date and Time"}
+            date={this.props.endDate} 
+            setDate={this.props.setEndDate}
+            // time={this.props.time}
           />
 
       </View>
@@ -94,7 +74,7 @@ export default class Calendar extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            Calendar.addToCalendar(this.props.title, this.props.description, this.props.date, this.props.date);
+            Calendar.addToCalendar(this.props.title, this.props.description, this.props.date, this.props.endDate);
           }}>
           <Text>Add Event to Calendar</Text>
         </TouchableOpacity>
@@ -103,71 +83,9 @@ export default class Calendar extends Component {
     );
   }
 
-  // static addToCalendar = (title: string, startDateUTC: Date) => {
-
-  //   const eventConfig = {
-  //     title,
-  //     //startDate: this.props.date,//utcDateToString(startDateUTC),
-  //     //endDate: utcDateToString(moment.utc(startDateUTC).add(1, 'hours')),
-  //     notes: this.props.description,
-  //     navigationBarIOS: {
-  //       tintColor: 'orange',
-  //       backgroundColor: 'green',
-  //       titleColor: 'blue',
-  //     },
-  //   };
-
-  //   AddCalendarEvent.presentEventCreatingDialog(eventConfig)
-  //     .then(
-  //       (eventInfo: {
-  //         calendarItemIdentifier: string,
-  //         eventIdentifier: string,
-  //       }) => {
-  //         alert('eventInfo -> ' + JSON.stringify(eventInfo));
-  //       }
-  //     )
-  //     .catch((error: string) => {
-  //       // handle error such as when user rejected permissions
-  //       alert('Error -> ' + error);
-  //     });
-  // };
-
-  // static editCalendarEventWithId = (eventId: string) => {
-  //   const eventConfig = {
-  //     eventId,
-  //   };
-
-  //   AddCalendarEvent.presentEventEditingDialog(eventConfig)
-  //     .then(eventInfo => {
-  //       alert('eventInfo -> ' + JSON.stringify(eventInfo));
-  //     })
-  //     .catch((error: string) => {
-  //       alert('Error -> ' + error);
-  //     });
-  // };
-
-  // static showCalendarEventWithId = (eventId: string) => {
-  //   const eventConfig = {
-  //     eventId,
-  //     allowsEditing: true,
-  //     allowsCalendarPreview: true,
-  //     navigationBarIOS: {
-  //       tintColor: 'orange',
-  //       backgroundColor: 'green',
-  //     },
-  //   };
-
-  //   AddCalendarEvent.presentEventViewingDialog(eventConfig)
-  //     .then(eventInfo => {
-  //       alert('eventInfo -> ' + JSON.stringify(eventInfo));
-  //     })
-  //     .catch((error: string) => {
-  //       alert('Error -> ' + error);
-  //     });
-  // };
-
   static addToCalendar = (title: string, description: string, date: Date, endDate: Date) => {
-    //console.log(this.state.getTitle())
+    console.log(date)
+    console.log(endDate)
     const eventConfig = {
       title: title,
       notes: description,

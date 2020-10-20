@@ -16,13 +16,14 @@ const DateTime = (props) => {
     const currentDate = selectedValue || new Date();
     setDate(currentDate);
     setTime(currentDate);
+    props.setDate(currentDate)
   }
 
   const onTimeChange = (event, selectedValue) => {
       const selectedTime = selectedValue || new Date();
       setTime(selectedTime);
       setDate(selectedTime);
-      setDateTime(time);
+      setDateTime(selectedTime);
   }
 
   const showDateBool = currentShow => {
@@ -41,6 +42,7 @@ const DateTime = (props) => {
 
   setDateTime = (time) => {
     date.setHours(time.getHours(), time.getMinutes())
+    props.setDate(time)
   }
 
   getDate = () => {
@@ -50,39 +52,31 @@ const DateTime = (props) => {
 
   return (
     
-    <View sytles={{flexDirection: 'column', justifyContent: 'center'}}>
-        <Text styles={{textAlign: 'center'}}>Event Date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()} {date.toLocaleTimeString()}</Text>
-        <Text>Event Date: {date.toString()}</Text>
-
+     <View sytles={{flexDirection: 'column', justifyContent: 'center'}}>
 
       <View>
-          <Button onPress={showDateBool} title="Show date picker!" />
-      </View>
-      <View>
-        <Button onPress={showTimeBool} title="Show time picker!" />
+          <Text>{props.str}</Text>
+          <DateTimePicker
+          testID="datePicker"
+          value={date}
+          mode={'date'}
+          display="default"
+          onChange={onDateChange}
+          />
+
+          <DateTimePicker
+            testID="timePicker"
+            value={time}
+            mode={'time'}
+            display="default"
+            onChange={onTimeChange}
+          />
       </View>
       
-      {showDate && (
-        <DateTimePicker
-        testID="datePicker"
-        value={date}
-        mode={'date'}
-        display="default"
-        onChange={onDateChange}
-      />)}
 
-      {showTime && (
-        <DateTimePicker
-          testID="timePicker"
-          value={time}
-          mode={'time'}
-          display="default"
-          onChange={onTimeChange}
-      />)}
-
-      <Button title="Submit"
+      {/* <Button title="Submit"
         onPress={() => getDate()}
-      />
+      /> */}
     </View>
     
   );

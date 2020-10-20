@@ -33,19 +33,29 @@ export default class Calendar extends Component {
   constructor(props) {
     super(props);
     state = { 
-      calendardate: new Date()
-    };
+      title: props.title,
+      description: props.description,
+      date: props.date
+     };
+    // console.log(state.title)
+    // console.log(state.description)
+    // console.log(state.date)
   }
   
-  // setHomeDate = (newDate) => {
-  //   this.setState({calendardate: newDate})
-  //   console.log("calendar new time: " + newDate)
-  //   //console.log("Calendar Time: " + this.state.calendardate)
-  //   this.props.setDate(newDate);
+  // componentDidMount = (props) =>{
+  //   this.setState({title: this.props.title, date: this.props.date, description: this.props.description})
+  //   console.log(this.props.title)
+  //   console.log(this.props.description)
+  //   console.log(this.props.date)
+
+  //   console.log(this.state.title)
+  //   console.log(this.state.description)
+  //   console.log(this.state.date)
   // }
 
-  // componentDidUpdate = () => {
-  //   //this.setHomeDate();
+  // getEndTime = (date: Date, h: Number) => {
+  //   return (date.getTime() + (h*60*60*1000))
+  //   // return new Date(date).addHours(1);
   // }
 
 
@@ -84,7 +94,7 @@ export default class Calendar extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            Calendar.addToCalendar(this.state.EVENT_TITLE);
+            Calendar.addToCalendar(this.props.title, this.props.description, this.props.date, this.props.date);
           }}>
           <Text>Add Event to Calendar</Text>
         </TouchableOpacity>
@@ -93,74 +103,76 @@ export default class Calendar extends Component {
     );
   }
 
-  static addToCalendar = (title: string, startDateUTC: moment) => {
+  // static addToCalendar = (title: string, startDateUTC: Date) => {
 
+  //   const eventConfig = {
+  //     title,
+  //     //startDate: this.props.date,//utcDateToString(startDateUTC),
+  //     //endDate: utcDateToString(moment.utc(startDateUTC).add(1, 'hours')),
+  //     notes: this.props.description,
+  //     navigationBarIOS: {
+  //       tintColor: 'orange',
+  //       backgroundColor: 'green',
+  //       titleColor: 'blue',
+  //     },
+  //   };
+
+  //   AddCalendarEvent.presentEventCreatingDialog(eventConfig)
+  //     .then(
+  //       (eventInfo: {
+  //         calendarItemIdentifier: string,
+  //         eventIdentifier: string,
+  //       }) => {
+  //         alert('eventInfo -> ' + JSON.stringify(eventInfo));
+  //       }
+  //     )
+  //     .catch((error: string) => {
+  //       // handle error such as when user rejected permissions
+  //       alert('Error -> ' + error);
+  //     });
+  // };
+
+  // static editCalendarEventWithId = (eventId: string) => {
+  //   const eventConfig = {
+  //     eventId,
+  //   };
+
+  //   AddCalendarEvent.presentEventEditingDialog(eventConfig)
+  //     .then(eventInfo => {
+  //       alert('eventInfo -> ' + JSON.stringify(eventInfo));
+  //     })
+  //     .catch((error: string) => {
+  //       alert('Error -> ' + error);
+  //     });
+  // };
+
+  // static showCalendarEventWithId = (eventId: string) => {
+  //   const eventConfig = {
+  //     eventId,
+  //     allowsEditing: true,
+  //     allowsCalendarPreview: true,
+  //     navigationBarIOS: {
+  //       tintColor: 'orange',
+  //       backgroundColor: 'green',
+  //     },
+  //   };
+
+  //   AddCalendarEvent.presentEventViewingDialog(eventConfig)
+  //     .then(eventInfo => {
+  //       alert('eventInfo -> ' + JSON.stringify(eventInfo));
+  //     })
+  //     .catch((error: string) => {
+  //       alert('Error -> ' + error);
+  //     });
+  // };
+
+  static addToCalendar = (title: string, description: string, date: Date, endDate: Date) => {
+    //console.log(this.state.getTitle())
     const eventConfig = {
-      title,
-      startDate: utcDateToString(startDateUTC),
-      endDate: utcDateToString(moment.utc(startDateUTC).add(1, 'hours')),
-      notes: 'tasty!',
-      navigationBarIOS: {
-        tintColor: 'orange',
-        backgroundColor: 'green',
-        titleColor: 'blue',
-      },
-    };
-
-    AddCalendarEvent.presentEventCreatingDialog(eventConfig)
-      .then(
-        (eventInfo: {
-          calendarItemIdentifier: string,
-          eventIdentifier: string,
-        }) => {
-          alert('eventInfo -> ' + JSON.stringify(eventInfo));
-        }
-      )
-      .catch((error: string) => {
-        // handle error such as when user rejected permissions
-        alert('Error -> ' + error);
-      });
-  };
-
-  static editCalendarEventWithId = (eventId: string) => {
-    const eventConfig = {
-      eventId,
-    };
-
-    AddCalendarEvent.presentEventEditingDialog(eventConfig)
-      .then(eventInfo => {
-        alert('eventInfo -> ' + JSON.stringify(eventInfo));
-      })
-      .catch((error: string) => {
-        alert('Error -> ' + error);
-      });
-  };
-
-  static showCalendarEventWithId = (eventId: string) => {
-    const eventConfig = {
-      eventId,
-      allowsEditing: true,
-      allowsCalendarPreview: true,
-      navigationBarIOS: {
-        tintColor: 'orange',
-        backgroundColor: 'green',
-      },
-    };
-
-    AddCalendarEvent.presentEventViewingDialog(eventConfig)
-      .then(eventInfo => {
-        alert('eventInfo -> ' + JSON.stringify(eventInfo));
-      })
-      .catch((error: string) => {
-        alert('Error -> ' + error);
-      });
-  };
-
-  static addToCalendar = (title: string) => {
-
-    const eventConfig = {
-      title,
-      notes: 'tasty!',
+      title: title,
+      notes: description,
+      startDate: date.toISOString(),
+      endDate: endDate.toISOString(),
       navigationBarIOS: {
         tintColor: 'orange',
         backgroundColor: 'green',

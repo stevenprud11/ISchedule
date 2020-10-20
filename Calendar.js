@@ -33,10 +33,20 @@ export default class Calendar extends Component {
   constructor(props) {
     super(props);
     state = { 
-
+      calendardate: new Date()
     };
   }
+  
+  // setHomeDate = (newDate) => {
+  //   this.setState({calendardate: newDate})
+  //   console.log("calendar new time: " + newDate)
+  //   //console.log("Calendar Time: " + this.state.calendardate)
+  //   this.props.setDate(newDate);
+  // }
 
+  // componentDidUpdate = () => {
+  //   //this.setHomeDate();
+  // }
 
 
   render() {
@@ -62,10 +72,9 @@ export default class Calendar extends Component {
           />
 
           <DateTime 
-            date={date} 
-            setDate={this.props.setDate}  
-            time={time}
-            setTime={this.props.setTime}
+            date={this.props.date} 
+            setDate={this.props.setDate}
+            time={this.props.time}
           />
 
       </View>

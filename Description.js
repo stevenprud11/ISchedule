@@ -10,7 +10,6 @@ import {
 
 export default class Description extends Component {
     state ={
-        description: "Event Description"
     }
 
     render(){
@@ -20,9 +19,9 @@ export default class Description extends Component {
             <View style = {{ flex: 1, flexDirection:"row"}}>
             <Text style = {styles.title} >Description: </Text>
             <TextInput style = {styles.input}
-              value={this.state.description}
-              placeholder = {this.state.description} 
-              onChangeText={(description) => this.setState({description})}
+              value={this.props.description}
+              placeholder = {this.props.description} 
+              onChangeText={(text) => this.props.setDescription(text)}
             />
               
           </View>

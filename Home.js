@@ -19,8 +19,7 @@ export default class Home extends Component {
       this.state = { 
         title: "Event Title",
         description: "Event Description",
-        date: new Date(),
-        time: new Date()
+        date: new Date()
       };
     }
 
@@ -33,11 +32,7 @@ export default class Home extends Component {
     }
 
     setDate = (newDate) => {
-        this.setState({date: newDate})
-    }
-
-    setTime = (newTime) => {
-        this.setState({time: newTime})
+        this.setState({date: newDate}, () => {console.log("new home date: " + this.state.date)})
     }
 
     render(){
@@ -50,7 +45,6 @@ export default class Home extends Component {
                 date={this.state.date} 
                 setDate={this.setDate}
                 time={this.state.time}
-                setTime={this.setTime}
             />
         )
     }

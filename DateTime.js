@@ -3,7 +3,9 @@ import {View, Button, Platform} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-const DateTime = () => {
+const DateTime = (props) => {
+  //console.log(props)
+  //const [setParentDate] = props.setDate;
   const [date, setDate] = useState(new Date());
   const [time, setTime] = useState(new Date(date.getFullYear(), date.getMonth(), date.getDate(), '12', '00', '00', '00'));
   const [showDate, setShowDate] = useState(false);
@@ -41,7 +43,13 @@ const DateTime = () => {
     date.setHours(time.getHours(), time.getMinutes())
   }
 
+  getDate = () => {
+    console.log("datetime: " + date)
+    props.setDate(date)
+  }
+
   return (
+    
     <View sytles={{flexDirection: 'column', justifyContent: 'center'}}>
         <Text styles={{textAlign: 'center'}}>Event Date: {date.getMonth()+1}/{date.getDate()}/{date.getFullYear()} {date.toLocaleTimeString()}</Text>
         <Text>Event Date: {date.toString()}</Text>
@@ -71,7 +79,12 @@ const DateTime = () => {
           display="default"
           onChange={onTimeChange}
       />)}
+
+      <Button title="Submit"
+        onPress={() => getDate()}
+      />
     </View>
+    
   );
 };
 

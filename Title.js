@@ -14,7 +14,6 @@ export default class Title extends Component {
 //need to pass prop to edit title from app bc props are not changable
 
     render(){
-        var setTitle = this.props.setTitle;
         return(
             <View style = {{ flex: 1, flexDirection:"row"}}>
             <Text style = {styles.title} >Title: </Text>

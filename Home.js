@@ -14,12 +14,12 @@ export default class Home extends Component {
     constructor(props) {
       super(props);
 
-      this.setTitle = this.setTitle.bind(this);
+      //this.setTitle = this.setTitle.bind(this);
 
       this.state = { 
         title: "Event Title",
         description: "Event Description",
-        date: new Date(),
+        startDate: new Date(),
         endDate: new Date()
       };
     }
@@ -32,25 +32,25 @@ export default class Home extends Component {
         this.setState({description: newDescription})
     }
 
-    setDate = (newDate) => {
-        this.setState({date: newDate}, () => {console.log("new home date: " + this.state.date)})
+    setStartDate = (newDate) => {
+        this.setState({startDate: newDate}, () => {console.log("Home Start Date: " + this.state.startDate)})
     }
 
     setEndDate = (newEndDate) => {
-        this.setState({endDate: newEndDate}, () => {console.log("new home end date: " + this.state.endDate)})
+        this.setState({endDate: newEndDate}, () => {console.log("Home End Date: " + this.state.endDate)})
     }
 
-    getTitle = () =>{
-        return this.state.title
-    }
+    // getTitle = () =>{
+    //     return this.state.title
+    // }
 
-    getDescription = () =>{
-        return this.state.description
-    }
+    // getDescription = () =>{
+    //     return this.state.description
+    // }
 
-    getDate = () =>{
-        return this.state.date
-    }
+    // getDate = () =>{
+    //     return this.state.date
+    // }
 
     render(){
         return(
@@ -61,16 +61,17 @@ export default class Home extends Component {
                 description={this.state.description} 
                 setDescription={this.setDescription}
 
-                date={this.state.date} 
-                setDate={this.setDate}
-                time={this.state.time}
+                startDate={this.state.startDate} 
+                setStartDate={this.setStartDate}
+                startTime={this.state.startTime}
 
                 endDate={this.state.endDate}
+                endTime={this.state.endTime}
                 setEndDate={this.setEndDate}
 
-                getTitle={this.getTitle}
-                getDescription={this.getDescription}
-                getDate={this.getDate}
+                // getTitle={this.getTitle}
+                // getDescription={this.getDescription}
+                // getDate={this.getDate}
             />
         )
     }

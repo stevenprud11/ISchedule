@@ -54,18 +54,21 @@ export default class Calendar extends Component {
           />
 
           <DateTime 
-            str={"Event Start Date and Time"}
-            date={this.props.date} 
-            setDate={this.props.setDate}
-            //time={this.props.time}
+            str={"Value 1"}
+            startDateID={1} // 1 = start time
+            startDate={this.props.startDate} 
+            setStartDate={this.props.setStartDate}
+            val={"random data"}
+            //startTime={this.props.startTime}
           />
 
-          <DateTime 
-            str={"Event End Date and Time"}
-            date={this.props.endDate} 
-            setDate={this.props.setEndDate}
-            // time={this.props.time}
-          />
+          {/* <DateTime 
+            str={"Value 2"}
+            endDateID={1} // 0 = end time
+            endDate={this.props.endDate} 
+            setEndDate={this.props.setEndDate}
+            //time={this.props.endTime}
+          /> */}
 
       </View>
       
@@ -74,7 +77,7 @@ export default class Calendar extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            Calendar.addToCalendar(this.props.title, this.props.description, this.props.date, this.props.endDate);
+            Calendar.addToCalendar(this.props.title, this.props.description, this.props.startDate, this.props.endDate);
           }}>
           <Text>Add Event to Calendar</Text>
         </TouchableOpacity>

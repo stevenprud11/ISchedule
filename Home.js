@@ -63,10 +63,10 @@ export default class Home extends Component {
 
                 startDate={this.state.startDate} 
                 setStartDate={this.setStartDate}
-                startTime={this.state.startTime}
+                //startTime={this.state.startTime}
 
                 endDate={this.state.endDate}
-                endTime={this.state.endTime}
+                //endTime={this.state.endTime}
                 setEndDate={this.setEndDate}
 
                 // getTitle={this.getTitle}

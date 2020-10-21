@@ -9,83 +9,66 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 
 const DateTime = (props) => {
-  //console.log(props)
-  //const [setParentDate] = props.setDate;
-  const [master, setMaster] = useState(new Date());
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date(date.getFullYear(), date.getMonth(), date.getDate(), '12', '00', '00', '00'));
-  const [startDateID] = useState(props.startDateID)
-  const [endDateID] = useState(props.endDateID)
+  const [masterStart, setMasterStart] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate(), '12', '00', '00', '00'));
 
+  const [masterEnd, setMasterEnd] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate(), '12', '00', '00', '00'));
 
-
-  const onDateChange = (event, selectedValue) =>{
+  const onStartDateChange = (event, selectedValue) =>{
     const currentDate = selectedValue || new Date();
-    setDate(currentDate);
-    setMasterDate(currentDate);
-    
-    //setTimesDate(currentDate);
-    //setTime(currentDate);
-    //setDateTime(currentDate)
-    //props.setDate(currentDate)
+    setStartDate(currentDate);
+    setMasterStartDate(currentDate);
   }
 
-  const onTimeChange = (event, selectedValue) => {
+  const onStartTimeChange = (event, selectedValue) => {
       const selectedTime = selectedValue || new Date();
-      setTime(selectedTime);
-      setMasterTime(selectedTime);
-      
-      //setDate(selectedTime);
-      //setDatesTime(selectedTime);
-      //props.setDate(selectedTime)
+      setStartTime(selectedTime);
+      setMasterStartTime(selectedTime);
   }
   
-
-  // const formatDate = (date, time) => {
-  //   return `${date.getMonth()}/${date.getDay() +
-  //     1}/${date.getFullYear()} ${time.getHours()}:${time.getMinutes()}`;
-  // };
-
-  setMasterDate = (date) => {
-    master.setDate(date.getDate())
-    master.setMonth(date.getMonth())
-    master.setFullYear(date.getFullYear())
-    if(startDateID == 1)
-      props.setStartDate(master)
-    else
-      props.setEndDate(master)
+  setMasterStartDate = (date) => {
+    masterStart.setDate(date.getDate())
+    masterStart.setMonth(date.getMonth())
+    masterStart.setFullYear(date.getFullYear())
+    props.setStartDate(masterStart)
   }
 
-  setMasterTime = (time) => {
-    console.log(this.state)
-    console.log(props)
-    master.setHours(time.getHours(), time.getMinutes())
-    //props.setDate(master)
-    if(startDateID == 1)
-      props.setStartDate(master)
-    else
-      props.setEndDate(master)
+  setMasterStartTime = (time) => {
+    console.log("date time state: " + JSON.stringify(masterStart))
+    console.log("props: " + JSON.stringify(props))
+    masterStart.setHours(time.getHours(), time.getMinutes())
+    props.setStartDate(masterStart)
   }
 
-  // setTimesDate = (date) => {
-  //   time.setDate(date.getDate())
-  //   time.setFullYear(date.getFullYear())
-  //   time.setMonth(date.getMonth());
+  const onEndDateChange = (event, selectedValue) =>{
+    const currentDate = selectedValue || new Date();
+    setEndDate(currentDate);
+    setMasterEndDate(currentDate);
+  }
 
-  //   props.setDate(time)
-  //   console.log("Set Times Date: " + time)
-  // }
+  const onEndTimeChange = (event, selectedValue) => {
+      const selectedTime = selectedValue || new Date();
+      setEndTime(selectedTime);
+      setMasterEndTime(selectedTime);
+  }
+  
+  setMasterEndDate = (date) => {
+    masterEnd.setDate(date.getDate())
+    masterEnd.setMonth(date.getMonth())
+    masterEnd.setFullYear(date.getFullYear())
+    props.setEndDate(masterEnd)
+  }
 
-  // setDatesTime = (time) => {
-  //   date.setHours(time.getHours(), time.getMinutes())
-  //   props.setDate(date)
-  //   console.log("Set Dates Time: " + date)
-  // }
+  setMasterEndTime = (time) => {
+    console.log("date time state: " + JSON.stringify(masterEnd))
+    console.log("props: " + JSON.stringify(props))
+    masterEnd.setHours(time.getHours(), time.getMinutes())
+    props.setEndDate(masterEnd)
+  }
 
-  // getDate = () => {
-  //   console.log("datetime: " + date)
-  //   props.setDate(date)
-  // }
 
   return (
     
@@ -95,18 +78,37 @@ const DateTime = (props) => {
           <Text>{props.str}</Text>
           <DateTimePicker
           testID="datePicker"
-          value={date}
+          value={startDate}
           mode={'date'}
           display="default"
-          onChange={onDateChange}
+          onChange={onStartDateChange}
           />
 
           <DateTimePicker
             testID="timePicker"
-            value={time}
+            value={startTime}
             mode={'time'}
             display="default"
-            onChange={onTimeChange}
+            onChange={onStartTimeChange}
+          />
+      </View>
+
+      <View title="Start Date Time">
+          <Text>{props.str}</Text>
+          <DateTimePicker
+          testID="datePicker1"
+          value={endDate}
+          mode={'date'}
+          display="default"
+          onChange={onEndDateChange}
+          />
+
+          <DateTimePicker
+            testID="timePicker1"
+            value={endTime}
+            mode={'time'}
+            display="default"
+            onChange={onEndTimeChange}
           />
       </View>
       

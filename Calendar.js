@@ -55,20 +55,14 @@ export default class Calendar extends Component {
 
           <DateTime 
             str={"Value 1"}
-            startDateID={1} // 1 = start time
             startDate={this.props.startDate} 
             setStartDate={this.props.setStartDate}
-            val={"random data"}
-            //startTime={this.props.startTime}
+
+            endDate={this.props.endDate}
+            setEndDate={this.props.setEndDate}
           />
 
-          {/* <DateTime 
-            str={"Value 2"}
-            endDateID={1} // 0 = end time
-            endDate={this.props.endDate} 
-            setEndDate={this.props.setEndDate}
-            //time={this.props.endTime}
-          /> */}
+
 
       </View>
       

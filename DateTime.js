@@ -12,33 +12,53 @@ const DateTime = (props) => {
   //console.log(props)
   //const [setParentDate] = props.setDate;
   const [master, setMaster] = useState(new Date());
-  const [date, setDate] = useState(new Date());
-  const [time, setTime] = useState(new Date(date.getFullYear(), date.getMonth(), date.getDate(), '12', '00', '00', '00'));
+  const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date(startDate.getFullYear(),
+  startDate.getMonth(), startDate.getDate(), '12', '00', '00', '00'));
+  const [endDate, setEndDate] = useState(new Date());
+  const [endTime, setEndTime] = useState(new Date(endDate.getFullYear(),
+  endDate.getMonth(), endDate.getDate(), '12', '00', '00', '00'));
   const [startDateID] = useState(props.startDateID)
   const [endDateID] = useState(props.endDateID)
+  const [dateChoice, setDateChoice] = useState(false)
+  const [timeChoice, setTimeChoice] = useState(false)
 
 
 
-  const onDateChange = (event, selectedValue) =>{
-    const currentDate = selectedValue || new Date();
-    setDate(currentDate);
-    setMasterDate(currentDate);
+  const onStartDateChange = (event, selectedValue) =>{
+    const currentStartDate = selectedValue || new Date();
+    setStartDate(currentStartDate);
+    setMasterDate(currentStartDate);
+    setDateChoice(false);
     
     //setTimesDate(currentDate);
     //setTime(currentDate);
     //setDateTime(currentDate)
     //props.setDate(currentDate)
   }
+  const onEndDateChange = (event, selectedValue) =>{
+    const currentEndDate = selectedValue || new Date();
+    setEndDate(currentEndDate);
+    setMasterDate(currentEndDate);
+    setDateChoice(true);
+  }
 
-  const onTimeChange = (event, selectedValue) => {
-      const selectedTime = selectedValue || new Date();
-      setTime(selectedTime);
-      setMasterTime(selectedTime);
+  const onStartTimeChange = (event, selectedValue) => {
+      const selectedStartTime = selectedValue || new Date();
+      setStartTime(selectedStartTime);
+      setMasterTime(selectedStartTime);
+      setTimeChoice(false);
       
       //setDate(selectedTime);
       //setDatesTime(selectedTime);
       //props.setDate(selectedTime)
   }
+  const onEndTimeChange = (event, selectedValue) => {
+    const selectedEndTime = selectedValue || new Date();
+    setEndTime(selectedEndTime);
+    setTimeChoice(true);
+    setMasterTime(selectedEndTime);
+}
   
 
   // const formatDate = (date, time) => {
@@ -50,7 +70,7 @@ const DateTime = (props) => {
     master.setDate(date.getDate())
     master.setMonth(date.getMonth())
     master.setFullYear(date.getFullYear())
-    if(startDateID == 1)
+    if(dateChoice === false)
       props.setStartDate(master)
     else
       props.setEndDate(master)
@@ -61,7 +81,7 @@ const DateTime = (props) => {
     console.log(props)
     master.setHours(time.getHours(), time.getMinutes())
     //props.setDate(master)
-    if(startDateID == 1)
+    if(timeChoice === false)
       props.setStartDate(master)
     else
       props.setEndDate(master)
@@ -89,24 +109,43 @@ const DateTime = (props) => {
 
   return (
     
-     <View sytles={{flexDirection: 'column', justifyContent: 'center'}}>
+     <View styles={{flexDirection: 'column', justifyContent: 'center'}}>
 
       <View title="Start Date Time">
-          <Text>{props.str}</Text>
+          <Text>{props.startStr}</Text>
           <DateTimePicker
-          testID="datePicker"
-          value={date}
+          testID="startDatePicker"
+          value={startDate}
           mode={'date'}
           display="default"
-          onChange={onDateChange}
+          onChange={onStartDateChange}
           />
 
           <DateTimePicker
-            testID="timePicker"
-            value={time}
+            testID="starttimePicker"
+            value={startTime}
             mode={'time'}
             display="default"
-            onChange={onTimeChange}
+            onChange={onStartTimeChange}
+          />
+      </View>
+
+      <View title="End Date Time">
+          <Text>{props.endStr}</Text>
+          <DateTimePicker
+          testID="endDatePicker"
+          value={endDate}
+          mode={'date'}
+          display="default"
+          onChange={onEndDateChange}
+          />
+
+          <DateTimePicker
+            testID="endTimePicker"
+            value={endTime}
+            mode={'time'}
+            display="default"
+            onChange={onEndTimeChange}
           />
       </View>
       

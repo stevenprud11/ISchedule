@@ -11,9 +11,8 @@ import {
 } from 'react-native';
 //Import basic react native components
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
-import Description from './Description.js'
 import DateTime from './DateTime.js'
-import Title from './Title.js'
+// import Title from './Title.js'
 
 
 import moment from 'moment';
@@ -22,53 +21,65 @@ export default class Calendar extends Component {
   constructor(props) {
     super(props);
     state = { 
-      title: props.title,
-      description: props.description,
-      date: props.date,
-      endDate: props.endDate
+      title: "Event Title",
+      description: "Event Description",
+      startDate: new Date(),
+      endDate: new Date()
      };
   }
 
+  setTitle = (newTitle) => {
+    this.setState({title: newTitle})
+}
 
+setDescription = (newDescription) => {
+    this.setState({description: newDescription})
+}
+
+setStartDate = (newDate) => {
+    this.setState({startDate: newDate}, () => {console.log("Home Start Date: " + this.state.startDate)})
+}
+
+setEndDate = (newEndDate) => {
+    this.setState({endDate: newEndDate}, () => {console.log("Home End Date: " + this.state.endDate)})
+}
 
   render() {
-    const {title, description, date, time, endDate} = this.props;
-    //console.log(this.props);
-    //console.log(title);
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
           Event Info:
         </Text>
-
-
-      <View style={{ flexDirection: 'column',justifyContent: 'space-around'}}>
-          <Title 
-            title={title} 
-            setTitle={this.props.setTitle} 
+        <View style={{ flexDirection: 'column',justifyContent: 'space-around'}}>
+   <View style = {{ flex: 1, flexDirection:"row"}}>
+            <Text style = {styles.title} >Title: </Text>
+            <TextInput style = {styles.input}
+              value={this.state.title}
+              placeholder = {this.state.title} 
+              onChangeText={(text) => this.setTitle(text)}
             />
-
-          <Description 
-            description={description}
-            setDescription={this.props.setDescription}
-          />
+              
+          </View>
+          <View style = {{ flex: 1, flexDirection:"row"}}>
+            <Text style = {styles.title} >Description: </Text>
+            <TextInput style = {styles.input}
+              value={this.state.description}
+              placeholder = {this.state.description} 
+              onChangeText={(text) => this.setDescription(text)}
+            /> 
+          </View>
 
           <DateTime 
-            str={"Value 1"}
+            startStr={"Value 1"}
+            endStr={"Value 2"}
             startDateID={1} // 1 = start time
-            startDate={this.props.startDate} 
-            setStartDate={this.props.setStartDate}
-            val={"random data"}
+            endStartDateID={2}
+            startDate={this.state.startDate} 
+            setStartDate={this.state.setStartDate}
+            endDate={this.state.endDate} 
+            setEndDate={this.state.setEndDate}
             //startTime={this.props.startTime}
           />
-
-          {/* <DateTime 
-            str={"Value 2"}
-            endDateID={1} // 0 = end time
-            endDate={this.props.endDate} 
-            setEndDate={this.props.setEndDate}
-            //time={this.props.endTime}
-          /> */}
 
       </View>
       
@@ -77,7 +88,7 @@ export default class Calendar extends Component {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            Calendar.addToCalendar(this.props.title, this.props.description, this.props.startDate, this.props.endDate);
+            Calendar.addToCalendar(this.state.title, this.state.description, this.state.startDate, this.state.endDate);
           }}>
           <Text>Add Event to Calendar</Text>
         </TouchableOpacity>
@@ -86,7 +97,7 @@ export default class Calendar extends Component {
     );
   }
 
-  static addToCalendar = (title: string, description: string, date: Date, endDate: Date) => {
+  static addToCalendar = (title, description, date, endDate) => {
     console.log(date)
     console.log(endDate)
     const eventConfig = {
@@ -104,13 +115,13 @@ export default class Calendar extends Component {
     AddCalendarEvent.presentEventCreatingDialog(eventConfig)
       .then(
         (eventInfo: {
-          calendarItemIdentifier: string,
-          eventIdentifier: string,
+          calendarItemIdentifier,
+          eventIdentifier,
         }) => {
           alert('eventInfo -> ' + JSON.stringify(eventInfo));
         }
       )
-      .catch((error: string) => {
+      .catch((error) => {
         // handle error such as when user rejected permissions
         alert('Error -> ' + error);
       });

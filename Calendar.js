@@ -16,8 +16,6 @@ import DateTime from './DateTime.js'
 import Title from './Title.js'
 
 
-import moment from 'moment';
-
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
@@ -33,8 +31,6 @@ export default class Calendar extends Component {
 
   render() {
     const {title, description, date, time, endDate} = this.props;
-    //console.log(this.props);
-    //console.log(title);
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
@@ -65,8 +61,6 @@ export default class Calendar extends Component {
 
 
       </View>
-      
-
 
         <TouchableOpacity
           style={styles.button}

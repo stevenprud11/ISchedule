@@ -4,10 +4,6 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 
-//current bug in date time for start date, 
-//time will not update properly
-
-
 const DateTime = (props) => {
   const [masterStart, setMasterStart] = useState(new Date());
   const [startDate, setStartDate] = useState(new Date());
@@ -77,7 +73,7 @@ const DateTime = (props) => {
       <View title="Start Date Time">
           <Text>{props.str}</Text>
           <DateTimePicker
-          testID="datePicker"
+          testID="startdatePicker"
           value={startDate}
           mode={'date'}
           display="default"
@@ -85,7 +81,7 @@ const DateTime = (props) => {
           />
 
           <DateTimePicker
-            testID="timePicker"
+            testID="starttimePicker"
             value={startTime}
             mode={'time'}
             display="default"
@@ -96,7 +92,7 @@ const DateTime = (props) => {
       <View title="Start Date Time">
           <Text>{props.str}</Text>
           <DateTimePicker
-          testID="datePicker1"
+          testID="enddatePicker"
           value={endDate}
           mode={'date'}
           display="default"
@@ -104,7 +100,7 @@ const DateTime = (props) => {
           />
 
           <DateTimePicker
-            testID="timePicker1"
+            testID="endtimePicker1"
             value={endTime}
             mode={'time'}
             display="default"
@@ -112,10 +108,6 @@ const DateTime = (props) => {
           />
       </View>
       
-
-      {/* <Button title="Submit"
-        onPress={() => getDate()}
-      /> */}
     </View>
     
   );

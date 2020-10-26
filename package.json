@@ -17,7 +17,9 @@
     "react-native": "0.63.2",
     "react-native-add-calendar-event": "^3.0.2",
     "react-native-date-picker": "^3.2.3",
+    "react-native-gesture-handler": "^1.8.0",
     "react-native-modal-datetime-picker": "^9.0.0",
+    "react-navigation": "^4.4.3",
     "xdate": "^0.8.2"
   },
   "devDependencies": {

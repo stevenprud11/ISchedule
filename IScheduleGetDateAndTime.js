@@ -1,7 +1,7 @@
 //NOTE: HOUR=24 indicates midnight. HOUR=0 indicates it was not able to be found.
 //I did not originally think to get two dates and times so a lot of the code for the second one is just quick and dirty to add that functionality
 
-var imgText="Hello, world! It is October 7, 2020 today at 12 PM.";
+var imgText="Hello, world! It is October 7, 2020 today at 12 PM. Tomorrow will be 10/8/2020, and at 3 A.M. it will certainly be time for bed.";
 var TF=imgText.split(" ");
 console.log(imgText);
 var MONTH=0;
@@ -195,7 +195,7 @@ function hourAMPM(posTime, index){
         if(AMPMSplit[0]=="p" || AMPMSplit[0]=="pm"){
             HOUR+=12;
         }else{ 
-            if(AMPMSplit[0]!="a" || AMPMSplit[0]!="am"){//if it wasn't pm and it isnt am, then we made a mistake this isn't our format that we're after
+            if(AMPMSplit[0]!="a" && AMPMSplit[0]!="am"){//if it wasn't pm and it isnt am, then we made a mistake this isn't our format that we're after
                 HOUR=0;
             }
         }
@@ -220,7 +220,7 @@ function hourAMPM2(posTime, index){
         if(AMPMSplit[0]=="p" || AMPMSplit[0]=="pm"){
             HOUR2+=12;
         }else{ 
-            if(AMPMSplit[0]!="a" || AMPMSplit[0]!="am"){//if it wasn't pm and it isnt am, then we made a mistake this isn't our format that we're after
+            if(AMPMSplit[0]!="a" && AMPMSplit[0]!="am"){//if it wasn't pm and it isnt am, then we made a mistake this isn't our format that we're after
                 HOUR2=0;
             }
         }
@@ -350,11 +350,26 @@ function findDateAndTime(){
     console.log("YEAR: "+YEAR);
     console.log("HOUR: "+HOUR);
     console.log("MINUTE: "+MINUTE);
+    if(HOUR==24){
+        HOUR=0;
+    }
+    var DATE=new Date(YEAR, MONTH, DAY, HOUR, MINUTE, 0, 0);
+    console.log("DATE: "+DATE);
+
     console.log("MONTH2: "+MONTH2);
     console.log("DAY2: "+DAY2);
     console.log("YEAR2: "+YEAR2);
     console.log("HOUR2: "+HOUR2);
     console.log("MINUTE2: "+MINUTE2);
+    if(DAY2!=0){
+        if(HOUR2==24){
+            HOUR2=0;
+        }
+        var DATE2=new Date(YEAR2, MONTH2, DAY2, HOUR2, MINUTE2, 0, 0);
+    }else{
+        var DATE2=new Date(YEAR, MONTH, DAY, HOUR+1, MINUTE, 0, 0);
+    }
+    console.log("DATE2: "+DATE2);
 }
 
 

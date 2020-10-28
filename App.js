@@ -12,6 +12,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
+  Button,
   Text,
   StatusBar,
 } from 'react-native';
@@ -24,27 +25,44 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import Camera from './Camera'
-import Calendar from './Calendar'
+import Camera from './Camera.js'
+import Calendar from './Calendar.js'
+import Home from './Home.js'
 
-const App: () => React$Node = () => {
+
+
+
+const RootStack = createStackNavigator();
+
+const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
+      {/* <SafeAreaView> */}
+        {/* <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <View style={styles.body}>
-            <Text>Hello World</Text>
-            <Camera/>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+           */}
+           {/* <Home/> */}
+          <NavigationContainer>
+            <RootStack.Navigator>
+              {/* <RootStack.Screen name="Home" component={Home} /> */}
+              <RootStack.Screen name="Camera" component={Camera} />
+              <RootStack.Screen name="Calendar" component={Calendar} />
+            </RootStack.Navigator>
+          </NavigationContainer>
+
+        {/* </ScrollView> */}
+      {/* </SafeAreaView> */}
     </>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   scrollView: {

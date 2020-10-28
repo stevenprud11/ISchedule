@@ -8,6 +8,15 @@ import {
     TouchableOpacity,
   } from 'react-native';
 
+  import {
+    createAppContainer
+  } from 'react-navigation';
+  
+  import {
+    createStackNavigator
+  } from 'react-navigation-stack'
+
+import App from './App';
 
 export default class Camera extends Component {
     constructor(props){
@@ -18,14 +27,20 @@ export default class Camera extends Component {
     }
 
     render(){
-
+        const {navigation} = this.props;
         return(
-            <View>
-                <Text>Camera Page</Text>
-            </View>
+          <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+          
+            <Text>Camera Screen</Text>
+            
+            <Button 
+                title="Submit"
+                onPress={() => navigation.push('Calendar')}
+            />
+            
+          </View>
         );
     }
-
-
-
 }
+
+

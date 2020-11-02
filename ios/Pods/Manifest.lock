@@ -302,6 +302,8 @@ PODS:
     - React-jsi (= 0.63.2)
   - RNDateTimePicker (3.0.3):
     - React-Core
+  - RNGestureHandler (1.8.0):
+    - React
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -356,6 +358,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -430,6 +433,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNGestureHandler:
+    :path: "../node_modules/react-native-gesture-handler"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -473,9 +478,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: 4d2e726957f4087449739b595f107c0d4b6c2d2d
   ReactCommon: a0a1edbebcac5e91338371b72ffc66aa822792ce
   RNDateTimePicker: e9fcd5ecdc0c5b018871e0d178d6040dca11973c
+  RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 7753aa3bc08061897fe977ffed0a7564e4b21e07
+PODFILE CHECKSUM: 9902e2546fa4ca26bc44e741adc8622498cf8fdc
 
 COCOAPODS: 1.9.3

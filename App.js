@@ -12,6 +12,7 @@ import {
   StyleSheet,
   ScrollView,
   View,
+  Button,
   Text,
   StatusBar,
 } from 'react-native';
@@ -24,53 +25,44 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+
+import Camera from './Camera.js'
+import Calendar from './Calendar.js'
+import Home from './Home.js'
+
+
+
+
+const RootStack = createStackNavigator();
+
+const App = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
+      {/* <SafeAreaView> */}
+        {/* <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+           */}
+           {/* <Home/> */}
+          <NavigationContainer>
+            <RootStack.Navigator>
+              {/* <RootStack.Screen name="Home" component={Home} /> */}
+              <RootStack.Screen name="Camera" component={Camera} />
+              <RootStack.Screen name="Calendar" component={Calendar} />
+            </RootStack.Navigator>
+          </NavigationContainer>
+
+        {/* </ScrollView> */}
+      {/* </SafeAreaView> */}
     </>
   );
 };
+
+
+
 
 const styles = StyleSheet.create({
   scrollView: {

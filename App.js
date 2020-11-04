@@ -7,6 +7,10 @@
  */
 
 import React from 'react';
+import Home from './Home.js'
+import Camera from './Camera.js'
+import Calendar from './Calendar.js'
+import DateTime from './DateTime.js'
 import {
   SafeAreaView,
   StyleSheet,
@@ -28,9 +32,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import Camera from './Camera.js'
-import Calendar from './Calendar.js'
-import Home from './Home.js'
+
 
 
 
@@ -46,14 +48,8 @@ const App = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
            */}
-           {/* <Home/> */}
-          <NavigationContainer>
-            <RootStack.Navigator>
-              {/* <RootStack.Screen name="Home" component={Home} /> */}
-              <RootStack.Screen name="Camera" component={Camera} />
-              <RootStack.Screen name="Calendar" component={Calendar} />
-            </RootStack.Navigator>
-          </NavigationContainer>
+           <Home />
+
 
         {/* </ScrollView> */}
       {/* </SafeAreaView> */}

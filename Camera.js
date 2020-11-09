@@ -9,8 +9,6 @@ import {
   } from 'react-native';
 
 
-import App from './App';
-
 export default class Camera extends Component {
     constructor(props){
         super(props)
@@ -22,13 +20,13 @@ export default class Camera extends Component {
     render(){
         const {navigation} = this.props;
         return(
-          <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
+          <View style={{alignItems: "center", justifyContent: "center"}}>
           
             <Text>Camera Screen</Text>
             
             <Button 
-                title="Submit"
-                onPress={() => navigation.push('Calendar')}
+                title="Take Picture"
+                onPress={() => navigation.push('OCR')}
             />
             
           </View>

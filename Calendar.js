@@ -8,6 +8,7 @@ import {
   Button,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 //Import basic react native components
 import * as AddCalendarEvent from 'react-native-add-calendar-event';
@@ -19,68 +20,96 @@ import Title from './Title.js'
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
-    state = { 
-      title: props.title,
-      description: props.description,
-      date: props.date,
-      endDate: props.endDate
-     };
+    this.state = { 
+      title: "10293847561029384756",
+      description: "",
+      startDate: new Date(),
+      endDate: new Date(),
+    };
   }
 
+  setTitle = (newTitle) => {
+    this.setState({title: newTitle})
+  }
 
+  setDescription = (newDescription) => {
+    this.setState({description: newDescription})
+  }
+
+  setStartDate = (newDate) => {
+    this.setState({startDate: newDate}, () => {console.log("Home Start Date: " + this.state.startDate)})
+  }
+
+  setEndDate = (newEndDate) => {
+    this.setState({endDate: newEndDate}, () => {console.log("Home End Date: " + this.state.endDate)})
+  }
+
+  setValues = (route) =>{
+    if(this.state.title == "10293847561029384756")
+      this.setState({
+        title: route.params.title, 
+        description: route.params.description, 
+        startDate: route.params.startDate, 
+        endDate: route.params.endDate
+      })
+  }
 
   render() {
-    const {title, description, date, time, endDate} = this.props;
+    const {route} = this.props;
+    this.setValues(route)
     return (
-      <View style={styles.container}>
-        <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
-          Event Info:
-        </Text>
+      <ScrollView>
+
+        <View style={styles.container}>
+          <Text style={{ fontSize: 20, textAlign: 'center', marginVertical: 10 }}>
+            Event Info:
+          </Text>
 
 
-      <View style={{ flexDirection: 'column',justifyContent: 'space-around'}}>
-          <Title 
-            title={title} 
-            setTitle={this.props.setTitle} 
+        <View style={{ flexDirection: 'column',justifyContent: 'space-around'}}>
+            <Title 
+              title={this.state.title}
+              setTitle={this.setTitle}
+              />
+
+            <Description 
+              description={this.state.description}
+              setDescription={this.setDescription}
             />
 
-          <Description 
-            description={description}
-            setDescription={this.props.setDescription}
-          />
+            <DateTime 
+              str={"Value 1"}
+              startDate={this.state.startDate} 
+              setStartDate={this.setStartDate}
 
-          <DateTime 
-            str={"Value 1"}
-            startDate={this.props.startDate} 
-            setStartDate={this.props.setStartDate}
-
-            endDate={this.props.endDate}
-            setEndDate={this.props.setEndDate}
-          />
+              endDate={this.state.endDate}
+              setEndDate={this.setEndDate}
+            />
 
 
 
-      </View>
+        </View>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => {
-            Calendar.addToCalendar(this.props.title, this.props.description, this.props.startDate, this.props.endDate);
-          }}>
-          <Text>Add Event to Calendar</Text>
-        </TouchableOpacity>
-        
-      </View>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              Calendar.addToCalendar(this.state.title, this.state.description, this.state.startDate, this.state.endDate);
+            }}>
+            <Text>Add Event to Calendar</Text>
+          </TouchableOpacity>
+          
+        </View>
+      </ScrollView>
     );
   }
 
-  static addToCalendar = (title: string, description: string, date: Date, endDate: Date) => {
-    console.log(date)
+  static addToCalendar = (title: string, description: string, startDate: Date, endDate: Date) => {
+    console.log(startDate)
     console.log(endDate)
     const eventConfig = {
       title: title,
       notes: description,
-      startDate: date.toISOString(),
+      startDate: startDate.toISOString(),
       endDate: endDate.toISOString(),
       navigationBarIOS: {
         tintColor: 'orange',

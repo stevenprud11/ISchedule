@@ -114,6 +114,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RNFS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>RNGestureHandler.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -240,6 +245,11 @@
 			<false/>
 		</dict>
 		<key>react-native-add-calendar-event.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>react-native-camera.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

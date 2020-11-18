@@ -17,25 +17,17 @@ export default class OCR extends Component {
             title: "Event Title",
             description: "Event Description",
             startDate: new Date(),
-            endDate: new Date()
+            endDate: new Date(),
+            value: ""
         }
     }
 
-    // setTitle = (newTitle) => {
-    //     this.setState({title: newTitle})
-    //   }
+    componentDidMount() {
+        this.setState({value:this.props.route.params.value})
+        console.log(this.state)
+    }
     
-    //   setDescription = (newDescription) => {
-    //     this.setState({description: newDescription})
-    //   }
-    
-    //   setStartDate = (newDate) => {
-    //     this.setState({startDate: newDate}, () => {console.log("Home Start Date: " + this.state.startDate)})
-    //   }
-    
-    //   setEndDate = (newEndDate) => {
-    //     this.setState({endDate: newEndDate}, () => {console.log("Home End Date: " + this.state.endDate)})
-    //   }
+
 
     render(){
         console.log(this.state)
@@ -53,7 +45,7 @@ export default class OCR extends Component {
           <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
           
             <Text>OCR Screen</Text>
-            
+            {/* <Text>{this.state.value}</Text> */}
             <Button 
                 title="Data Loaded"
                 onPress={() => navigation.push('Calendar', {                

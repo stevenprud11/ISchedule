@@ -23,6 +23,7 @@ export default class Camera extends PureComponent {
         super(props)
         this.state = {
           takingPic: false,
+          value: ""
         }
     }
 
@@ -43,7 +44,8 @@ export default class Camera extends PureComponent {
           RNFS.readFile(data.uri, 'base64')
             .then(res =>{
               console.log(res);
-              this.props.navigation.push("OCR");
+              this.setState({value: res})
+              this.props.navigation.push("OCR", {value: this.state.value});
             });
             //console.log(data.uri);
         

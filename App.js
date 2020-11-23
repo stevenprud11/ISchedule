@@ -33,7 +33,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Camera from './Camera.js'
 import Calendar from './Calendar.js'
 import OCR from './OCR.js'
-
+import Cam from './Cam.js'
 
 const RootStack = createStackNavigator();
 
@@ -48,7 +48,7 @@ const App = () => {
            */}
           <NavigationContainer>
             <RootStack.Navigator>
-              <RootStack.Screen name="Camera" component={Camera} />
+              <RootStack.Screen name="Camera" component={Cam} />
               <RootStack.Screen name="OCR" component={OCR} />
               <RootStack.Screen name="Calendar" component={Calendar} />
             </RootStack.Navigator>

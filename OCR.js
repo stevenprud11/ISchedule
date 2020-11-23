@@ -45,7 +45,7 @@ export default class OCR extends Component {
           <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
           
             <Text>OCR Screen</Text>
-            {/* <Text>{this.state.value}</Text> */}
+            <Text>{this.state.value}</Text>
             <Button 
                 title="Data Loaded"
                 onPress={() => navigation.push('Calendar', {                

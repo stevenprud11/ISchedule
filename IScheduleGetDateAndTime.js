@@ -1,16 +1,16 @@
 //NOTE: HOUR=24 indicates midnight. HOUR=0 indicates it was not able to be found.
 //I did not originally think to get two dates and times so a lot of the code for the second one is just quick and dirty to add that functionality
 
-//var imgText="Hello, world! It is October 7, 2020 today at 12 PM. Tomorrow will be 10/8/2020, and at 3 A.M. it will certainly be time for bed.";
-var imgText="Our thing is gonna happen.";
-var TF=imgText.split(" ");
+var imgText="Hello, world! It is October 7, 2020 today at 12 PM. Tomorrow will be 10/8/2020, and at 3 A.M. it will certainly be time for bed.";
+//var imgText="Our thing is gonna happen.";
+
 console.log(imgText);
 var MONTH=0;
 var DAY=0;
 var YEAR=0;
 var HOUR=0;
 var MINUTE=0;
-var MONTH2=0;
+var MONTH2=0;                                       
 var DAY2=0;
 var YEAR2=0;
 var HOUR2=0;
@@ -108,7 +108,7 @@ function MMDDYYYY2(rawData){
     return 0;
 }
 
-function colonTimes(rawData, index){
+function colonTimes(rawData, index, TF){
     var noColon=rawData.split(":");
     HOUR=parseInt(noColon[0],10);
     MINUTE=parseInt(noColon[1],10);
@@ -137,7 +137,7 @@ function colonTimes(rawData, index){
     return 0;
 }
 
-function colonTimes2(rawData, index){
+function colonTimes2(rawData, index, TF){
     var noColon=rawData.split(":");
     HOUR2=parseInt(noColon[0],10);
     MINUTE2=parseInt(noColon[1],10);
@@ -186,7 +186,7 @@ function milTimeConvert2(milTime){
     MINUTE2+=parseInt(milTime.charAt(3),10);
 }
 
-function hourAMPM(posTime, index){
+function hourAMPM(posTime, index, TF){
     HOUR=posTime;
     var possibleAMPM=TF[index+1];
     possibleAMPM=possibleAMPM.toLowerCase();
@@ -211,7 +211,7 @@ function hourAMPM(posTime, index){
     }
 }
 
-function hourAMPM2(posTime, index){
+function hourAMPM2(posTime, index, TF){
     HOUR2=posTime;
     var possibleAMPM=TF[index+1];
     possibleAMPM=possibleAMPM.toLowerCase();
@@ -236,7 +236,10 @@ function hourAMPM2(posTime, index){
     }
 }
 
-function findDateAndTime(){
+
+//When you pass this function a string, it will return an array containing date 1(the start time) and date 2(the end time)
+function findDateAndTime(string){
+    var TF=string.split(" ");
     var i=0;
     while(i<TF.length){
         
@@ -302,7 +305,7 @@ function findDateAndTime(){
         if(HOUR==0){
             //Try to get HH:MM times (colontimes)
             if(TF[i].charAt(1)==":" || TF[i].charAt(2)==":"){
-                colonTimes(TF[i], i);
+                colonTimes(TF[i], i, TF);
                 //console.log("Now exited colonTimes");
             }
             //trying to get HHMM times (military time format)
@@ -318,13 +321,13 @@ function findDateAndTime(){
                 var possibleTime=parseInt(TF[i],10);
                 //console.log("possibleTime="+possibleTime);
                 if(possibleTime>0 && possibleTime<=12){
-                    hourAMPM(possibleTime, i);
+                    hourAMPM(possibleTime, i, TF);
                 }
             }
         }else if(HOUR2==0){
             //Try to get HH:MM times (colontimes)
             if(TF[i].charAt(1)==":" || TF[i].charAt(2)==":"){
-                colonTimes2(TF[i], i);
+                colonTimes2(TF[i], i, TF);
                 //console.log("Now exited colonTimes");
             }
             //trying to get HHMM times (military time format)
@@ -340,46 +343,45 @@ function findDateAndTime(){
                 var possibleTime=parseInt(TF[i],10);
                 //console.log("possibleTime="+possibleTime);
                 if(possibleTime>0 && possibleTime<=12){
-                    hourAMPM2(possibleTime, i);
+                    hourAMPM2(possibleTime, i, TF);
                 }
             }
         }
         i++;
     }
-}
-
-
-console.log("Length of TF is: "+ TF.length);
-findDateAndTime();
-
-console.log("MONTH: "+MONTH);
-console.log("DAY: "+DAY);
-console.log("YEAR: "+YEAR);
-console.log("HOUR: "+HOUR);
-console.log("MINUTE: "+MINUTE);
-if(MONTH!=0){
-    if(HOUR==24){
-        HOUR=0;
+    console.log("MONTH: "+MONTH);
+    console.log("DAY: "+DAY);
+    console.log("YEAR: "+YEAR);
+    console.log("HOUR: "+HOUR);
+    console.log("MINUTE: "+MINUTE);
+    if(MONTH!=0){
+        if(HOUR==24){
+            HOUR=0;
+        }
+        var DATE=new Date(YEAR, MONTH-1, DAY, HOUR, MINUTE, 0, 0);
+    }else{
+        var DATE=new Date();
     }
-    var DATE=new Date(YEAR, MONTH-1, DAY, HOUR, MINUTE, 0, 0);
-}else{
-    var DATE=new Date();
-}
-console.log("DATE: "+DATE);
+    console.log("DATE: "+DATE);
 
-console.log("MONTH2: "+MONTH2);
-console.log("DAY2: "+DAY2);
-console.log("YEAR2: "+YEAR2);
-console.log("HOUR2: "+HOUR2);
-console.log("MINUTE2: "+MINUTE2);
-if(DAY2!=0){
-    if(HOUR2==24){
-        HOUR2=0;
+    console.log("MONTH2: "+MONTH2);
+    console.log("DAY2: "+DAY2);
+    console.log("YEAR2: "+YEAR2);
+    console.log("HOUR2: "+HOUR2);
+    console.log("MINUTE2: "+MINUTE2);
+    if(DAY2!=0){
+        if(HOUR2==24){
+            HOUR2=0;
+        }
+        var DATE2=new Date(YEAR2, MONTH2-1, DAY2, HOUR2, MINUTE2, 0, 0);
+    }else{
+        var DATE2=new Date();
+        HOUR2=DATE2.getHours();
+        DATE2.setHours(HOUR2+1);
     }
-    var DATE2=new Date(YEAR2, MONTH2-1, DAY2, HOUR2, MINUTE2, 0, 0);
-}else{
-    var DATE2=new Date();
-    HOUR2=DATE2.getHours();
-    DATE2.setHours(HOUR2+1);
+    console.log("DATE2: "+DATE2);
+    var dates=new Array(DATE, DATE2);
+    return dates;
 }
-console.log("DATE2: "+DATE2);
+
+console.log(findDateAndTime(imgText));

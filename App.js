@@ -34,7 +34,7 @@ import Camera from './Camera.js'
 import Cam from './Cam.js'
 import Calendar from './Calendar.js'
 import OCR from './OCR.js'
-
+import Cam from './Cam.js'
 
 const RootStack = createStackNavigator();
 

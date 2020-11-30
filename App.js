@@ -31,6 +31,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Camera from './Camera.js'
+import Cam from './Cam.js'
 import Calendar from './Calendar.js'
 import OCR from './OCR.js'
 
@@ -48,7 +49,7 @@ const App = () => {
            */}
           <NavigationContainer>
             <RootStack.Navigator>
-              <RootStack.Screen name="Camera" component={Camera} />
+              <RootStack.Screen name="Camera" component={Cam} />
               <RootStack.Screen name="OCR" component={OCR} />
               <RootStack.Screen name="Calendar" component={Calendar} />
             </RootStack.Navigator>

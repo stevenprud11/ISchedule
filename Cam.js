@@ -2,10 +2,7 @@ import React, {useState} from 'react';
 import {Button, StyleSheet, Text, View, Image} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import ProgressCircle from 'react-native-progress/Circle';
-import TesseractOcr, {
-  LANG_ENGLISH,
-  useEventListener,
-} from 'react-native-tesseract-ocr';
+import RNTextDetector from "react-native-text-detector";
 
 const DEFAULT_HEIGHT = 500;
 const DEFAULT_WITH = 600;
@@ -15,7 +12,7 @@ const defaultPickerOptions = {
   width: DEFAULT_WITH,
 };
 
-function Cam() {
+function Cam({props, navigation}) {
   const [isLoading, setIsLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [imgSrc, setImgSrc] = useState(null);
@@ -28,12 +25,14 @@ function Cam() {
     setIsLoading(true);
 
     try {
-      const tesseractOptions = {};
-      const recognizedText = await TesseractOcr.recognize(
-        path,
-        LANG_ENGLISH,
-        tesseractOptions,
-      );
+      const options = {
+        quality: 0.8,
+        base64: true,
+        skipProcessing: true,
+      };
+      // const { uri } = await this.camera.takePictureAsync(options);
+      const recognizedText = await RNTextDetector.detectFromUri(path);
+      console.log('visionResp', recognizedText);
       setText(recognizedText);
     } catch (err) {
       console.error(err);

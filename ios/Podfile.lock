@@ -331,6 +331,10 @@ PODS:
     - TOCropViewController
   - RNScreens (2.14.0):
     - React-Core
+  - RNTextDetector (0.0.6):
+    - React
+    - TesseractOCRiOS (~> 4.0.0)
+  - TesseractOCRiOS (4.0.0)
   - TOCropViewController (2.5.5)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -394,6 +398,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNTextDetector (from `../node_modules/react-native-text-detector/ios`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -409,6 +414,7 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - OpenSSL-Universal
+    - TesseractOCRiOS
     - TOCropViewController
     - YogaKit
 
@@ -485,6 +491,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-crop-picker"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNTextDetector:
+    :path: "../node_modules/react-native-text-detector/ios"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -536,10 +544,12 @@ SPEC CHECKSUMS:
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNImageCropPicker: 16951bc02411f50c4d197488ed6406a23dc3b5f1
   RNScreens: 2e278a90eb15092ed261d4f2271e3fc9b60d08d4
+  RNTextDetector: 3983fcecbd4a95ea4664d3269a62c1b14c3a712b
+  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
   TOCropViewController: da59f531f8ac8a94ef6d6c0fc34009350f9e8bfe
   Yoga: 7740b94929bbacbddda59bf115b5317e9a161598
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 3867f0bd68d42fc45536e0b9045d5932791bdf3a
+PODFILE CHECKSUM: b98cf3d80fdce1b17e4d72e2efab33542f239e24
 
 COCOAPODS: 1.9.3

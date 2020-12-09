@@ -4,7 +4,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import ProgressCircle from 'react-native-progress/Circle';
 import RNTextDetector from "react-native-text-detector";
 
-const DEFAULT_HEIGHT = 500;
+const DEFAULT_HEIGHT = 800;
 const DEFAULT_WITH = 600;
 const defaultPickerOptions = {
   cropping: true,
@@ -17,9 +17,9 @@ function Cam({props, navigation}) {
   const [progress, setProgress] = useState(0);
   const [imgSrc, setImgSrc] = useState(null);
   const [text, setText] = useState('');
-  useEventListener('onProgressChange', (p) => {
-    setProgress(p.percent / 100);
-  });
+  // useEventListener('onProgressChange', (p) => {
+  //   setProgress(p.percent / 100);
+  // });
 
   const recognizeTextFromImage = async (path) => {
     setIsLoading(true);
@@ -32,6 +32,7 @@ function Cam({props, navigation}) {
       };
       // const { uri } = await this.camera.takePictureAsync(options);
       const recognizedText = await RNTextDetector.detectFromUri(path);
+      console.log(path) //need to encode picture to base64
       console.log('visionResp', recognizedText);
       setText(recognizedText);
     } catch (err) {
@@ -68,7 +69,8 @@ function Cam({props, navigation}) {
   };
 
   const passTextToOcr = (text) => {
-    this.props.navigation.push("OCR", {value: text});
+    console.log("cam text from passTextToOcr: " + text)
+    navigation.push("OCR", {value: text});
   }
 
   return (
@@ -99,7 +101,8 @@ function Cam({props, navigation}) {
         <View style={styles.imageContainer}>
           <Image style={styles.image} source={imgSrc} />
           {isLoading ? (
-            <ProgressCircle showsText progress={progress} />
+            // <ProgressCircle showsText progress={progress} />
+            <Text>Loading</Text>
           ) : (
               passTextToOcr(text)
             // <Text>{text}</Text>

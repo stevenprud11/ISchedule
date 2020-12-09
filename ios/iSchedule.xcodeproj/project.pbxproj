@@ -19,6 +19,7 @@
 		723D5B1678E091CA936C178F /* libPods-iSchedule-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AE1433EAB6BC1E7084C3FD1 /* libPods-iSchedule-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		90C492635DBBC7A75DC87692 /* libPods-iSchedule-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CFA52B9D995ABD202F9A8740 /* libPods-iSchedule-tvOSTests.a */; };
+		B07ED22C25784C58009268A1 /* eng.traineddata in Resources */ = {isa = PBXBuildFile; fileRef = B07ED22B25784C58009268A1 /* eng.traineddata */; };
 		D7E7DFB08A9ACDBB37FD25A8 /* libPods-iSchedule-iScheduleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270AC7C2C88A13BC0E905172 /* libPods-iSchedule-iScheduleTests.a */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		7DBAD6D50FBEE2324D1F163C /* Pods-iSchedule-iScheduleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iSchedule-iScheduleTests.release.xcconfig"; path = "Target Support Files/Pods-iSchedule-iScheduleTests/Pods-iSchedule-iScheduleTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = iSchedule/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A48A26DB75539778BA583ED9 /* Pods-iSchedule.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iSchedule.debug.xcconfig"; path = "Target Support Files/Pods-iSchedule/Pods-iSchedule.debug.xcconfig"; sourceTree = "<group>"; };
+		B07ED22B25784C58009268A1 /* eng.traineddata */ = {isa = PBXFileReference; lastKnownFileType = file; path = eng.traineddata; sourceTree = "<group>"; };
 		CC112F2953EAAF7AD73B86B0 /* Pods-iSchedule-iScheduleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iSchedule-iScheduleTests.debug.xcconfig"; path = "Target Support Files/Pods-iSchedule-iScheduleTests/Pods-iSchedule-iScheduleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CFA52B9D995ABD202F9A8740 /* libPods-iSchedule-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-iSchedule-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -125,6 +127,7 @@
 		13B07FAE1A68108700A75B9A /* iSchedule */ = {
 			isa = PBXGroup;
 			children = (
+				B07ED22A25784C10009268A1 /* tessdata */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -203,6 +206,14 @@
 				2D02E4901E0B4A5D006451C7 /* iSchedule-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B07ED22A25784C10009268A1 /* tessdata */ = {
+			isa = PBXGroup;
+			children = (
+				B07ED22B25784C58009268A1 /* eng.traineddata */,
+			);
+			path = tessdata;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B07ED22C25784C58009268A1 /* eng.traineddata in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
@@ -871,7 +883,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -925,7 +937,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",

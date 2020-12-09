@@ -28,6 +28,7 @@
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "^2.13.0",
     "react-native-tesseract-ocr": "^2.0.1",
+    "react-native-text-detector": "0.0.6",
     "react-navigation": "^4.4.3"
   },
   "devDependencies": {

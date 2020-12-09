@@ -3,6 +3,7 @@ import {Button, StyleSheet, Text, View, Image} from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 import ProgressCircle from 'react-native-progress/Circle';
 import RNTextDetector from "react-native-text-detector";
+import { RNCamera } from 'react-native-camera';
 
 const DEFAULT_HEIGHT = 500;
 const DEFAULT_WITH = 600;
@@ -17,9 +18,9 @@ function Cam({props, navigation}) {
   const [progress, setProgress] = useState(0);
   const [imgSrc, setImgSrc] = useState(null);
   const [text, setText] = useState('');
-  useEventListener('onProgressChange', (p) => {
-    setProgress(p.percent / 100);
-  });
+  // React.useEventListener('onProgressChange', (p) => {
+  //   setProgress(p.percent / 100);
+  // });
 
   const recognizeTextFromImage = async (path) => {
     setIsLoading(true);
@@ -30,18 +31,32 @@ function Cam({props, navigation}) {
         base64: true,
         skipProcessing: true,
       };
-      // const { uri } = await this.camera.takePictureAsync(options);
-      const recognizedText = await RNTextDetector.detectFromUri(path);
-      console.log('visionResp', recognizedText);
+      const { uri } = await this.camera.takePictureAsync(options);
+      const visionResp = await RNTextDetector.detectFromUri(uri);
+      console.log('visionResp', visionResp);
       setText(recognizedText);
-    } catch (err) {
-      console.error(err);
+      setIsLoading(false);
+      setProgress(0);
+    } catch (e) {
+      console.warn(e);
       setText('');
     }
-
-    setIsLoading(false);
-    setProgress(0);
   };
+    // try {
+    //   const options = {
+    //     quality: 0.8,
+    //     base64: true,
+    //     skipProcessing: true,
+    //   };
+    //   // const { uri } = await this.camera.takePictureAsync(options);
+    //   const recognizedText = await RNTextDetector.detectFromUri(path);
+    //   console.log('visionResp', recognizedText);
+    //   setText(recognizedText);
+    // } catch (err) {
+    //   console.error(err);
+    //   setText('');
+    // }
+  //};
 
   const recognizeFromPicker = async (options = defaultPickerOptions) => {
     try {
@@ -68,21 +83,27 @@ function Cam({props, navigation}) {
   };
 
   const passTextToOcr = (text) => {
-    this.props.navigation.push("OCR", {value: text});
+    navigation.push("OCR", {value: text});
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tesseract OCR example</Text>
-      <Text style={styles.instructions}>Select an image source:</Text>
+          <RNCamera
+          ref={ref => {
+            this.camera = ref;
+          }}
+          style={styles.preview}
+          type={RNCamera.Constants.Type.back}
+          flashMode={RNCamera.Constants.FlashMode.on}
+        />
+      {/* <Text style={styles.title}>Tesseract OCR example</Text>
+      <Text style={styles.instructions}>Select an image source:</Text> */}
       <View style={styles.options}>
         <View style={styles.button}>
           <Button
             disabled={isLoading}
             title="Camera"
-            onPress={() => {
-              recognizeFromCamera();
-            }}
+            onPress={recognizeTextFromImage()}
           />
         </View>
         <View style={styles.button}>
